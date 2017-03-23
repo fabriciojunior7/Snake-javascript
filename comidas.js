@@ -12,7 +12,7 @@ function Comida(x, y, largura, altura) {
 		rect(this.x, this.y, this.largura, this.altura);
 	}
 
-	this.mover = function(largura, altura){
+	this.mover = function(largura, altura, cobra, calda){
 		px = int(random(10, largura-20));
 		py = int(random(10, altura-20));
 
@@ -24,5 +24,13 @@ function Comida(x, y, largura, altura) {
 		}
 		this.x = px;
 		this.y = py;
+		//for(var i=0; i<cc; i++){
+		//	if(px == calda[i][0]){
+		//		this.mover(largura, altura, cobra, calda);
+		//	}
+		//	if(py == calda[i][1]){
+		//		this.mover(largura, altura, cobra, calda);
+		//	}
+		//}
 	}
 }

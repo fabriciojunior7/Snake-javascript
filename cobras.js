@@ -30,7 +30,7 @@ function Cobra(x, y, largura, altura, velocidade, botoes){
 		
 	}
 
-	this.atualizarPosicao = function(){
+	this.atualizarPosicao = function(largura, altura){
 		//Calda
 		if(this.calda.length > 0){
 			for(var i=this.tamanhoCalda; i>=0; i--){
@@ -56,6 +56,22 @@ function Cobra(x, y, largura, altura, velocidade, botoes){
 		else if(this.udlr[3] == true){
 			this.x += this.velocidade;
 		}
+
+		//X
+		if(this.x < 0){
+			this.x = largura-10;
+		}
+		else if(this.x >= largura){
+			this.x = 0;
+		}
+		//Y
+		if(this.y < 0){
+			this.y = altura-10;
+		}
+		else if(this.y >= largura){
+			this.y = 0;
+		}
+
 
 	}
 

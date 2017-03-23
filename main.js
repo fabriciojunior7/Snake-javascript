@@ -1,5 +1,5 @@
 var largura, altura;
-var frames = 15;
+var frames = 12;
 var escala, hit;
 var jogador1;
 var comida;
@@ -17,7 +17,7 @@ function setup(){
 	jogador1 = new Cobra(100, 10, escala, escala, escala, [38, 40, 37, 39]);
 	jogador1.udlr = [false, true, false, true];
 	comida = new Comida(0, 0, escala, escala);
-	comida.mover(largura, altura);
+	comida.mover(largura, altura, [jogador1.x, jogador1.y], jogador1.calda);
 }
 
 function draw(){
@@ -28,11 +28,11 @@ function draw(){
 		jogador1.comeu();
 		comida.mover(largura, altura);
 	}
-	jogador1.atualizarPosicao();
+	jogador1.atualizarPosicao(largura, altura);
 	//Desenhar
 	comida.desenharComida();
 	jogador1.desenharCobra();
-	//print("X: " + jogador1.x + "| Y: " + jogador1.y);
+	print("X: " + jogador1.x + "| Y: " + jogador1.y);
 }
 
 function keyPressed(){
