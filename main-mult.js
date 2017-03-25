@@ -7,12 +7,36 @@ var colisaoJ1, colisaoJ2;
 var j1TextoX, j1TextoY, j2TextoX, j2TextoY, empateX, empateY; 
 var j1colidiu, j2colidiu;
 
+var lose, mordida1, mordida2, mordida3, gongo1, gongo2, start, somAleatorio;
+var epic1, epic2, epic3;
+
+function preload(){
+	lose = loadSound("sons/lose-mult.mp3");
+	mordida_mult = loadSound("sons/mordida-mult.mp3");
+	gongo1 = loadSound("sons/gongo1.mp3");
+	gongo2 = loadSound("sons/gongo2.mp3");
+	start = loadSound("sons/start-mult.mp3");
+	epic1 = loadSound("sons/start.mp3");
+	epic2 = epic1;
+	epic3 = epic1;
+}
+
 function setup(){
+	somAleatorio = int(random(1, 4));
+	if(somAleatorio == 1){epic1 = loadSound("sons/musicas/epic1.mp3", loaded);}
+	else if(somAleatorio == 2){epic2 = loadSound("sons/musicas/epic2.mp3", loaded);}
+	else if(somAleatorio == 3){epic3 = loadSound("sons/musicas/epic3.mp3", loaded);}
+	else{epic3 = loadSound("sons/musicas/epic3.mp3", loaded);}
 	//largura = windowWidth;
 	//altura = windowHeight;
 	largura = 600;
 	altura = 600;
 	escala = 10;
+
+	lose.setVolume(0.6);
+	gongo1.setVolume(0.8);
+	gongo2.setVolume(0.8);
+	start.setVolume(0.3);
 
 	j1TextoX = -100;
 	j1TextoY = -100;
@@ -35,6 +59,25 @@ function setup(){
 	comida.mover(largura, altura, jogador1.calda, jogador2.calda);
 }
 
+function loaded(){
+	if(somAleatorio == 1){
+		epic1.setVolume(0.3);
+		epic1.loop();
+	}
+	else if(somAleatorio == 2){
+		epic2.setVolume(0.3);
+		epic2.loop();
+	}
+	else if(somAleatorio == 3){
+		epic3.setVolume(0.3);
+		epic3.loop();
+	}
+	else{
+		epic3.setVolume(0.3);
+		epic3.loop();
+	}
+}
+
 function draw(){
 	background(0);
 	grade();
@@ -48,10 +91,14 @@ function draw(){
 	if(hit1 == true){
 		jogador1.comeu();
 		comida.mover(largura, altura, jogador1.calda, jogador2.calda);
+		mordida_mult.play();
+
 	}
 	else if(hit2 == true){
 		jogador2.comeu();
 		comida.mover(largura, altura, jogador1.calda, jogador2.calda);
+		somAleatorio = int(random(1, 4));
+		mordida_mult.play();
 	}
 
 	if(jogador1.x == jogador2.x && jogador1.y == jogador2.y){empate();}
@@ -78,8 +125,12 @@ function draw(){
 	else if(j2colidiu == true){j1Venceu();}
 	else if(j1colidiu == true){j2Venceu();}
 
-	jogador1.atualizarPosicao(largura, altura);
-	jogador2.atualizarPosicao(largura, altura);
+	j1colidiu = jogador1.atualizarPosicao(largura, altura);
+	j2colidiu = jogador2.atualizarPosicao(largura, altura);
+
+	if(j1colidiu == true && j2colidiu == true){empate();}
+	else if(j2colidiu == true){j1Venceu();}
+	else if(j1colidiu == true){j2Venceu();}
 	//Desenhar
 	comida.desenharComida();
 	jogador1.desenharCobra();
@@ -130,12 +181,14 @@ function grade(){
 function j1Venceu(){
 	j1TextoX = 140;
 	j1TextoY = 200;
+	lose.play();
 	noLoop();
 }
 
 function j2Venceu(){
 	j2TextoX = 175;
 	j2TextoY = 200;
+	lose.play();
 	noLoop();
 }
 
@@ -144,5 +197,8 @@ function empate(){
 	empateY = 200;
 	j1TextoY = -200;
 	j2TextoY = -200;
+	somAleatorio = int(random(1, 3));
+	if(somAleatorio == 1){gongo1.play();}
+	else if(somAleatorio == 2){gongo2.play();}
 	noLoop();
 }

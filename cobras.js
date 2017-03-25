@@ -86,6 +86,10 @@ function Cobra(x, y, largura, altura, velocidade, botoes){
 	}
 
 	this.gameOver = function(){
+		lose.play();
+		happy1.pause();
+		happy2.pause();
+		happy3.pause();
 		noLoop();
 	}
 
@@ -104,7 +108,10 @@ function Cobra(x, y, largura, altura, velocidade, botoes){
 		}
 
 		if(key == 32){
-			this.movimentacao = true;
+			if(this.movimentacao == false){
+				this.movimentacao = true;
+				start.play();
+			}
 		}
 
 	}

@@ -4,7 +4,26 @@ var escala, hit;
 var jogador1;
 var comida;
 
+var lose, mordida1, mordida2, mordida3, gongo1, gongo2, start, somAleatorio;
+var happy1, happy2, happy3;
+
+function preload(){
+	lose = loadSound("sons/lose.mp3");
+	mordida1 = loadSound("sons/mordida1.mp3");
+	mordida2 = loadSound("sons/mordida2.mp3");
+	mordida3 = loadSound("sons/mordida3.mp3");
+	start = loadSound("sons/start.mp3");
+	happy1 = loadSound("sons/start.mp3");
+	happy2 = loadSound("sons/start.mp3");
+	happy3 = loadSound("sons/start.mp3");
+}
+
 function setup(){
+	somAleatorio = int(random(1, 4));
+	if(somAleatorio == 1){happy1 = loadSound("sons/musicas/happy1.mp3", loaded);}
+	else if(somAleatorio == 2){happy2 = loadSound("sons/musicas/happy2.mp3", loaded);}
+	else if(somAleatorio == 3){happy3 = loadSound("sons/musicas/happy3.mp3", loaded);}
+	else{happy3 = loadSound("sons/musicas/happy3.mp3", loaded);}
 	//largura = windowWidth;
 	//altura = windowHeight;
 	largura = 300;
@@ -14,11 +33,32 @@ function setup(){
 	tela.position((windowWidth/2.0)-150, (windowHeight/2.0)-150);
 	frameRate(frames);
 
+	lose.setVolume(0.6);
+
 	//Objetos
 	jogador1 = new Cobra(150, 0, escala, escala, escala, [38, 40, 37, 39]);
 	jogador1.udlr = [false, true, false, false];
 	comida = new Comida(0, 0, escala, escala);
 	comida.mover(largura, altura, [jogador1.x, jogador1.y], jogador1.calda);
+}
+
+function loaded(){
+	if(somAleatorio == 1){
+		happy1.setVolume(0.1);
+		happy1.loop();
+	}
+	else if(somAleatorio == 2){
+		happy2.setVolume(0.1);
+		happy2.loop();
+	}
+	else if(somAleatorio == 3){
+		happy3.setVolume(0.3);
+		happy3.loop();
+	}
+	else{
+		happy3.setVolume(0.3);
+		happy3.loop();
+	}
 }
 
 function draw(){
@@ -32,6 +72,10 @@ function draw(){
 	if(hit == true){
 		jogador1.comeu();
 		comida.mover(largura, altura, [jogador1.x, jogador1.y], jogador1.calda);
+		somAleatorio = int(random(1, 4));
+		if(somAleatorio == 1){mordida1.play();}
+		else if(somAleatorio == 2){mordida2.play();}
+		else if(somAleatorio == 3){mordida3.play();}
 	}
 	jogador1.atualizarPosicao(largura, altura);
 	//Desenhar

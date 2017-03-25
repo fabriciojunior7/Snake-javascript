@@ -10,7 +10,7 @@ function Cobra(x, y, largura, altura, velocidade, botoes, r, g, b, jogador){
 	this.velocidade = velocidade;
 	this.tamanhoCalda = 0;
 	//this.calda = [[-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100]];
-	this.calda = [];
+	this.calda = [[-100, -100]];
 	this.up = botoes[0];
 	this.down = botoes[1];
 	this.left = botoes[2];
@@ -67,23 +67,23 @@ function Cobra(x, y, largura, altura, velocidade, botoes, r, g, b, jogador){
 
 		//X
 		if(this.x < 0){
-			this.gameOver();
+			return(true);
 		}
 		else if(this.x >= largura){
-			this.gameOver();
+			return(true);
 		}
 		//Y
 		if(this.y < 0){
-			this.gameOver();
+			return(true);
 		}
 		else if(this.y >= altura){
-			this.gameOver();
+			return(true);
 		}
 
 		//Game Over
 		for(var i=0; i<this.tamanhoCalda; i++){
 			if(this.x == this.calda[i][0] && this.y == this.calda[i][1]){
-				this.gameOver();
+				return(true);
 			}
 		}
 
@@ -114,7 +114,10 @@ function Cobra(x, y, largura, altura, velocidade, botoes, r, g, b, jogador){
 		}
 
 		if(key == 32){
-			this.movimentacao = true;
+			if(this.movimentacao == false){
+				this.movimentacao = true;
+				start.play();
+			}
 		}
 
 	}
