@@ -59,20 +59,31 @@ function Cobra(x, y, largura, altura, velocidade, botoes){
 
 		//X
 		if(this.x < 0){
-			this.x = largura-10;
+			this.gameOver();
 		}
 		else if(this.x >= largura){
-			this.x = 0;
+			this.gameOver();
 		}
 		//Y
 		if(this.y < 0){
-			this.y = altura-10;
+			this.gameOver();
 		}
-		else if(this.y >= largura){
-			this.y = 0;
+		else if(this.y >= altura){
+			this.gameOver();
+		}
+
+		//Game Over
+		for(var i=0; i<this.tamanhoCalda; i++){
+			if(this.x == this.calda[i][0] && this.y == this.calda[i][1]){
+				this.gameOver();
+			}
 		}
 
 
+	}
+
+	this.gameOver = function(){
+		noLoop();
 	}
 
 	this.botaoPressionado = function(key){

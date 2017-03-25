@@ -7,7 +7,7 @@ function Comida(x, y, largura, altura) {
 
 	//Metodos
 	this.desenharComida = function(){
-		fill(255, 102, 255);
+		fill(255, 255, 0);
 		noStroke();
 		rect(this.x, this.y, this.largura, this.altura);
 	}
@@ -24,13 +24,12 @@ function Comida(x, y, largura, altura) {
 		}
 		this.x = px;
 		this.y = py;
-		//for(var i=0; i<cc; i++){
-		//	if(px == calda[i][0]){
-		//		this.mover(largura, altura, cobra, calda);
-		//	}
-		//	if(py == calda[i][1]){
-		//		this.mover(largura, altura, cobra, calda);
-		//	}
-		//}
+
+		for(var i=0; i<calda.length; i++){
+			if(px == calda[i][0] && py == calda[i][1]){
+				this.mover(largura, altura, cobra, calda);
+				print("Ocorreu");
+			}
+		}
 	}
 }
