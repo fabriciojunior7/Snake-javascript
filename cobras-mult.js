@@ -1,32 +1,37 @@
-function Cobra(x, y, largura, altura, velocidade, botoes){
+function Cobra(x, y, largura, altura, velocidade, botoes, r, g, b, jogador){
 	//Atributos
 	this.x = x;
 	this.y = y;
 	this.largura = largura;
 	this.altura = altura;
+	this.r = r;
+	this.g = g;
+	this.b = b;
 	this.velocidade = velocidade;
 	this.tamanhoCalda = 0;
-	this.calda = [];
+	this.calda = [[-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100]];
+	//this.calda = [];
 	this.up = botoes[0];
 	this.down = botoes[1];
 	this.left = botoes[2];
 	this.right = botoes[3];
 	this.udlr = [false, false, false, false];
 	this.movimentacao = false;
+	this.jogador = jogador;
 
 	//Metodos
 	this.desenharCobra = function(){
 		stroke(0);
 		//Calda
 		if(this.calda.length > 0){
-			fill(255);
+			fill(this.r, this.g, this.b);
 			for(var i=0; i<=this.tamanhoCalda; i++){
 				rect(this.calda[i][0], this.calda[i][1], this.largura, this.altura);
 			}
 		}
 
 		//Cabeca
-		fill(255, 0, 0);
+		fill(this.r-150, this.g-150, this.b-150);
 		rect(this.x, this.y, this.largura, this.altura);
 		
 	}
@@ -86,7 +91,12 @@ function Cobra(x, y, largura, altura, velocidade, botoes){
 	}
 
 	this.gameOver = function(){
-		noLoop();
+		if(this.jogador == 1){
+			j2Venceu();
+		}
+		else if(this.jogador == 2){
+			j1Venceu();
+		}
 	}
 
 	this.botaoPressionado = function(key){
