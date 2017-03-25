@@ -1,5 +1,5 @@
 var largura, altura;
-var frames = 10;
+var frames = 15;
 var escala, hit;
 var jogador1;
 var comida;
@@ -132,7 +132,7 @@ function draw(){
 	else if(j2colidiu == true){j1Venceu();}
 	else if(j1colidiu == true){j2Venceu();}
 	//Desenhar
-	comida.desenharComida();
+	comida.desenharComida(frames, largura, altura, jogador1.calda, jogador2.calda);
 	jogador1.desenharCobra();
 	jogador2.desenharCobra();
 
