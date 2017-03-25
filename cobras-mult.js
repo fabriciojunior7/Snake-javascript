@@ -9,8 +9,8 @@ function Cobra(x, y, largura, altura, velocidade, botoes, r, g, b, jogador){
 	this.b = b;
 	this.velocidade = velocidade;
 	this.tamanhoCalda = 0;
-	this.calda = [[-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100]];
-	//this.calda = [];
+	//this.calda = [[-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100], [-100, -100]];
+	this.calda = [];
 	this.up = botoes[0];
 	this.down = botoes[1];
 	this.left = botoes[2];
